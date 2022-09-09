@@ -2,24 +2,24 @@
 
 void main()
 {
-    float peso, altura, imc;
+    float weight, height, imc;
 
-    printf("Entre com o seu peso \n");
-    scanf("%f", &peso);
+    printf("Input a weight \n");
+    scanf("%f", &weight);
 
-    printf("Entre com a altura \n");
-    scanf("%f", &altura);
+    printf("Input a height \n");
+    scanf("%f", &height);
 
-    imc = (peso / (altura * altura));
+    imc = (weight / (height * height));
 
     printf("IMC: %.2f\n", imc);
     if ((20 <= imc) && (imc < 25))
     {
-        printf("Peso normal");
+        printf("Wight normal");
     }
     else if ((25 <= imc) && (imc < 30))
     {
-        printf("Acima do peso");
+        printf("Above weight");
     }
     else if ((30 <= imc) && (imc < 34))
     {
@@ -27,10 +27,10 @@ void main()
     }
     else if (imc > 34)
     {
-        printf("Muito obeso");
+        printf("Overweight");
     }
     else
     {
-        printf("Abaixo do peso");
+        printf("Underweight");
     }
 }
