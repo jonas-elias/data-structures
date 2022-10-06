@@ -17,5 +17,5 @@ void main()
 
     *p = 500; // desreferenciar p
     printf("\n a vale %d :", a);
-    // printf("\n p vale %d :", *p);
+    printf("\n p vale %d :", *p);
 }
