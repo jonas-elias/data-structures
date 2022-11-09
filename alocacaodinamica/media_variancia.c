@@ -4,7 +4,7 @@
 
 float calculoMedia(float *v, int qtd)
 {
-    float media;
+    float media = 0.0;
     for (int i = 0; i < qtd; i++)
     {
         media += *(v + i);
@@ -15,7 +15,7 @@ float calculoMedia(float *v, int qtd)
 
 float variancia(float *v, float media, int qtd)
 {
-    float variancia = 0;
+    float variancia = 0.0;
     for (int i = 0; i < qtd; i++)
     {
         variancia += (*(v + i) - media) * (*(v + i) - media);
