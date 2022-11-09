@@ -4,7 +4,7 @@ void troca(int *px, int *py)
 {
     int aux = *px;
 
-    printf("valor: %d", *px);
+    printf("valor: %x", px);
 
     *px = *py;
     *py = aux;
