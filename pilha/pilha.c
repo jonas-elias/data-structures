@@ -1,4 +1,5 @@
 // empilhar valores inteiros
+#include <stdio.h>
 
 struct No
 {
@@ -155,4 +156,21 @@ void empilhar(no *PILHA)
 
 void desempilhar(no *PILHA)
 {
+    if (PILHA->atual == NULL)
+    {
+        return NULL;
+    }
+    else
+    {
+        no *ultimo = PILHA->atual, *penultimo = PILHA;
+
+        while (ultimo != NULL)
+        {
+            penultimo = ultimo;
+            ultimo = ultimo->atual;
+        }
+
+        penultimo->atual = NULL;
+        return ultimo;
+    }
 }
