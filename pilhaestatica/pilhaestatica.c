@@ -1,32 +1,37 @@
+/**
+ * @file pilhaestatica.c
+ * @author <jonas-elias/>
+ * @date 2022-12-13
+ */
+
+/**
+ * Importação das bibliotecas padrões de desenvolvimento na linguagem C
+ */
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * Constante que será atribuída ao número total de itens que podem ser armazenados na pilha
+ */
 #define N 3
 
+/**
+ * Struct que irá definir o vetor dos dados inteiros e a quantidade
+ * da pilha (será atualizada a cada novo evento na execução do programa)
+ */
 struct Pilha
 {
     int dados[N];
     int qtd_pilha;
 };
-
 typedef struct Pilha pilha;
 
-int menu(void)
-{
-    int opcao;
-
-    printf("Escolha a opção desejada: \n");
-    printf("0. Sair. \n");
-    printf("1. Zerar a pilha. \n");
-    printf("2. Exibir a pilha. \n");
-    printf("3. Empilhar. \n");
-    printf("4. Desempilhar. \n");
-    printf("Opcao: \n");
-    scanf("%d", &opcao);
-
-    return opcao;
-}
-
+/**
+ * Função para inicialização de todos os índices da estrutura
+ * passada no parâmetro
+ *
+ * @param p pilha
+ */
 void inicializa(pilha *p)
 {
     for (int i = 0; i < N; i++)
@@ -36,79 +41,105 @@ void inicializa(pilha *p)
     p->qtd_pilha = 0;
 }
 
+/**
+ * Função para verificar se a pilha está vazia
+ *
+ * @param p pilha
+ */
+void vazia(pilha *p)
+{
+    if (p->qtd_pilha == 0)
+    {
+        printf("Pilha vazia\n");
+        return;
+    }
+}
+
+/**
+ * Função que irá empilhar os valores no vetor. Caso o número total de valores na pilha
+ * seja >= que a constante definida (N), a pilha irá pular a instrução de empilhamento (Pilha cheia).
+ *
+ * @param p pilha
+ * @param valor valorNumérico
+ */
 void empilha(pilha *p, int valor)
 {
     if (p->qtd_pilha < N)
     {
         p->dados[p->qtd_pilha] = valor;
         p->qtd_pilha++;
+        return;
     }
-    else
-    {
-        printf("Pilha cheia");
-    }
+    printf("Pilha cheia\n");
 }
 
+/**
+ * Função que irá exibir os valores contidos na pilha.
+ *
+ * @param p
+ */
 void exibe(pilha *p)
 {
+    vazia(p);
     for (int i = 0; i < p->qtd_pilha; i++)
     {
         printf("%d\n", p->dados[i]);
     }
 }
 
+/**
+ * Função para desempilhar o último elemento adicionado na pilha.
+ *
+ * @param p pilha
+ */
 void desempilhar(pilha *p)
 {
     p->qtd_pilha--;
     p->dados[p->qtd_pilha] = 0;
 }
 
-void opcao(pilha *PILHA, int op)
+/**
+ * Função para remover todos os elementos da pilha.
+ * Enquanto a quantidade de elementos na pilha, for != 0
+ * irá atribuir o valor inteiro 0 para os índices e diminuir
+ * a quantidade de elementos contidos na pilha (qtd_pilha).
+ *
+ * @param p pilha
+ */
+void libera(pilha *p)
 {
-    switch (op)
+    while (p->qtd_pilha != 0)
     {
-    case 0:
-        // libera(PILHA);
-        break;
-    case 1:
-        // libera(PILHA);
-        // inicializa(PILHA);
-        break;
-    case 2:
-        // exibe(PILHA);
-        break;
-    case 3:
-        // empilha(PILHA);
-        break;
-    case 4:
-        // temp = desempilha(PILHA);
-        // faltou completar
-        break;
-    default:
-        printf("\n Comando invalido. \n\n");
+        p->qtd_pilha--;
+        p->dados[p->qtd_pilha] = 0;
     }
 }
 
-// void libera(pilha *p)
-// {
-// for (int i = 0; i < p->qtd_pilha; i++)
-// {
-//     free(p->dados[i]);
-//     p->qtd_pilha--;
-// }
-// free(p);
-// }
-
+/**
+ * Função main para fazer as chamadas das ações realizadas
+ * por uma pilha estática.
+ */
 void main()
 {
+    /**
+     * Inicialização da variável do tipo "pilha"
+     */
     pilha p;
     inicializa(&p);
 
+    /**
+     * Testes...
+     */
     empilha(&p, 10);
     empilha(&p, 20);
     empilha(&p, 30);
     exibe(&p);
     desempilhar(&p);
     printf("\n");
+    exibe(&p);
+    libera(&p);
+    exibe(&p);
+    empilha(&p, 40);
+    empilha(&p, 50);
     exibe(&p);
 }
